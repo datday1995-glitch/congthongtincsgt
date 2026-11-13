@@ -1,0 +1,6 @@
+{
+  "name": "Cổng Thông Tin Hướng Dẫn Thủ Tục Hành Chính – Phòng CSGT Công An TP Đà Nẵng",
+  "description": "Cổng thông tin hướng dẫn thủ tục giải quyết hành chính chính thức của Phòng Cảnh sát giao thông – Công an thành phố Đà Nẵng. Tra cứu hồ sơ, quy trình, tài liệu và hướng dẫn thực hiện minh bạch, thuận tiện.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

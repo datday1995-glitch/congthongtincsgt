@@ -1,0 +1,284 @@
+{
+  "entities": {
+    "Article": {
+      "title": "Article",
+      "description": "Administrative procedure guide, instruction article, or official announcement published by Da Nang Traffic Police Department.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 240, "minLength": 3 },
+        "slug": { "type": "string", "maxLength": 180, "minLength": 2, "pattern": "^[a-z0-9-]+$" },
+        "categoryId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "categoryName": { "type": "string", "maxLength": 120 },
+        "sectionType": { "type": "string", "enum": ["procedure", "guide", "news"] },
+        "shortDescription": { "type": "string", "maxLength": 600 },
+        "coverImage": { "type": "string", "maxLength": 2048 },
+        "contentHtml": { "type": "string", "maxLength": 500000 },
+        "attachments": { "type": "array" },
+        "keywords": { "type": "array" },
+        "status": { "type": "string", "enum": ["draft", "published", "hidden"] },
+        "publishedDate": { "type": "string", "maxLength": 40 },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 120 },
+        "isSample": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "title", "slug", "categoryId", "categoryName", "sectionType",
+        "shortDescription", "coverImage", "contentHtml", "attachments",
+        "keywords", "status", "publishedDate", "authorId", "authorName",
+        "isSample", "createdAt", "updatedAt"
+      ]
+    },
+    "ProcedureGuide": {
+      "title": "ProcedureGuide",
+      "description": "Dedicated structured GPLX administrative procedure page with unified 15-field statutory layout.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 240, "minLength": 3 },
+        "slug": { "type": "string", "maxLength": 180, "minLength": 2, "pattern": "^[a-z0-9-]+$" },
+        "cardOrder": { "type": "number" },
+        "isCoreCard": { "type": "boolean" },
+        "iconKey": { "type": "string", "maxLength": 40 },
+        "groupKey": {
+          "type": "string",
+          "enum": ["cap-lan-dau", "doi-gplx", "cap-lai-gplx", "phuc-hoi-diem", "sat-hach-qua-han", "gplx-quoc-te"]
+        },
+        "shortDescription": { "type": "string", "maxLength": 600 },
+        "intro": { "type": "string", "maxLength": 4000 },
+        "targetAudience": { "type": "string", "maxLength": 4000 },
+        "conditions": { "type": "string", "maxLength": 6000 },
+        "dossierItems": { "type": "array" },
+        "dossierQuantity": { "type": "string", "maxLength": 300 },
+        "submissionMethods": { "type": "array" },
+        "receivingLocation": { "type": "string", "maxLength": 1200 },
+        "steps": { "type": "array" },
+        "processingTime": { "type": "string", "maxLength": 1200 },
+        "fees": { "type": "string", "maxLength": 1200 },
+        "result": { "type": "string", "maxLength": 1200 },
+        "legalBasis": { "type": "array" },
+        "forms": { "type": "array" },
+        "faqs": { "type": "array" },
+        "subCases": { "type": "array" },
+        "referenceNotes": { "type": "string", "maxLength": 4000 },
+        "onlinePortalUrl": { "type": "string", "maxLength": 1000 },
+        "keywords": { "type": "array" },
+        "status": { "type": "string", "enum": ["draft", "published", "hidden"] },
+        "isVerifiedSeed": { "type": "boolean" },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "authorName": { "type": "string", "maxLength": 120 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "title", "slug", "cardOrder", "isCoreCard", "iconKey", "groupKey",
+        "shortDescription", "intro", "targetAudience", "conditions",
+        "dossierItems", "dossierQuantity", "submissionMethods", "receivingLocation",
+        "steps", "processingTime", "fees", "result", "legalBasis", "forms",
+        "faqs", "subCases", "referenceNotes", "onlinePortalUrl", "keywords",
+        "status", "isVerifiedSeed", "authorId", "authorName", "createdAt", "updatedAt"
+      ]
+    },
+    "LegalDocument": {
+      "title": "LegalDocument",
+      "description": "Legal document, circular, decree, law, or administrative decision governing GPLX procedures.",
+      "type": "object",
+      "properties": {
+        "docNumber": { "type": "string", "maxLength": 100, "minLength": 2 },
+        "title": { "type": "string", "maxLength": 400, "minLength": 3 },
+        "docType": { "type": "string", "enum": ["law", "decree", "circular", "decision", "form", "guide"] },
+        "issuedDate": { "type": "string", "maxLength": 80 },
+        "effectiveDate": { "type": "string", "maxLength": 80 },
+        "issuingAuthority": { "type": "string", "maxLength": 200 },
+        "validityStatus": { "type": "string", "enum": ["effective", "amended", "expired", "verifying"] },
+        "summary": { "type": "string", "maxLength": 2000 },
+        "pdfUrl": { "type": "string", "maxLength": 2048 },
+        "relatedProcedureSlugs": { "type": "array" },
+        "status": { "type": "string", "enum": ["draft", "published", "hidden"] },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "docNumber", "title", "docType", "issuedDate", "effectiveDate",
+        "issuingAuthority", "validityStatus", "summary", "pdfUrl",
+        "relatedProcedureSlugs", "status", "authorId", "createdAt", "updatedAt"
+      ]
+    },
+    "FaqItem": {
+      "title": "FaqItem",
+      "description": "Frequently asked question and legally grounded answer for citizens.",
+      "type": "object",
+      "properties": {
+        "question": { "type": "string", "maxLength": 500, "minLength": 4 },
+        "answer": { "type": "string", "maxLength": 4000, "minLength": 4 },
+        "category": { "type": "string", "maxLength": 120 },
+        "relatedProcedureSlug": { "type": "string", "maxLength": 180 },
+        "legalRef": { "type": "string", "maxLength": 400 },
+        "order": { "type": "number" },
+        "status": { "type": "string", "enum": ["draft", "published", "hidden"] },
+        "authorId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "question", "answer", "category", "relatedProcedureSlug", "legalRef",
+        "order", "status", "authorId", "createdAt", "updatedAt"
+      ]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Procedure category managed by administrators.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 120, "minLength": 2 },
+        "slug": { "type": "string", "maxLength": 120, "pattern": "^[a-z0-9-]+$" },
+        "description": { "type": "string", "maxLength": 400 },
+        "order": { "type": "number" },
+        "isVisible": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug", "description", "order", "isVisible", "createdAt", "updatedAt"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Global portal branding, contact info, banner, and footer settings.",
+      "type": "object",
+      "properties": {
+        "siteTitle": { "type": "string", "maxLength": 200 },
+        "agencyName": { "type": "string", "maxLength": 160 },
+        "departmentName": { "type": "string", "maxLength": 160 },
+        "logoUrl": { "type": "string", "maxLength": 2048 },
+        "bannerUrl": { "type": "string", "maxLength": 2048 },
+        "bannerTitle": { "type": "string", "maxLength": 200 },
+        "bannerSubtitle": { "type": "string", "maxLength": 500 },
+        "address": { "type": "string", "maxLength": 300 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "facebookUrl": { "type": "string", "maxLength": 500 },
+        "websiteUrl": { "type": "string", "maxLength": 500 },
+        "introContent": { "type": "string", "maxLength": 5000 },
+        "footerNote": { "type": "string", "maxLength": 500 },
+        "mapEmbedUrl": { "type": "string", "maxLength": 1000 },
+        "updatedBy": { "type": "string", "maxLength": 128 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "siteTitle", "agencyName", "departmentName", "logoUrl", "bannerUrl",
+        "bannerTitle", "bannerSubtitle", "address", "phone", "facebookUrl",
+        "websiteUrl", "introContent", "footerNote", "mapEmbedUrl", "updatedBy", "updatedAt"
+      ]
+    },
+    "PasscodeAccount": {
+      "title": "PasscodeAccount",
+      "description": "Officer access passcode account (stores cryptographic scrypt/pbkdf2 hash only, never plain text).",
+      "type": "object",
+      "properties": {
+        "ownerName": { "type": "string", "maxLength": 120, "minLength": 2 },
+        "passcodeHash": { "type": "string", "maxLength": 512, "minLength": 32 },
+        "note": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["active", "locked"] },
+        "failedAttempts": { "type": "number" },
+        "lockedUntil": { "type": "string", "maxLength": 64 },
+        "lastLoginAt": { "type": "string", "maxLength": 64 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": [
+        "ownerName", "passcodeHash", "note", "status", "failedAttempts",
+        "lockedUntil", "lastLoginAt", "createdBy", "createdAt", "updatedAt"
+      ]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized Google accounts granted admin, editor, or read-only viewer access.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 200 },
+        "displayName": { "type": "string", "maxLength": 120 },
+        "role": { "type": "string", "enum": ["super_admin", "editor", "viewer"] },
+        "status": { "type": "string", "enum": ["active", "revoked"] },
+        "addedBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "displayName", "role", "status", "addedBy", "createdAt", "updatedAt"]
+    },
+    "MediaAsset": {
+      "title": "MediaAsset",
+      "description": "Uploaded image or document metadata.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 240 },
+        "url": { "type": "string", "maxLength": 2048 },
+        "storagePath": { "type": "string", "maxLength": 512 },
+        "mimeType": { "type": "string", "maxLength": 120 },
+        "sizeBytes": { "type": "number" },
+        "kind": { "type": "string", "enum": ["image", "document"] },
+        "uploadedBy": { "type": "string", "maxLength": 128 },
+        "uploadedByName": { "type": "string", "maxLength": 120 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "url", "storagePath", "mimeType", "sizeBytes", "kind", "uploadedBy", "uploadedByName", "createdAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Audit log of admin and officer actions.",
+      "type": "object",
+      "properties": {
+        "actorName": { "type": "string", "maxLength": 120 },
+        "actorType": { "type": "string", "enum": ["google_admin", "passcode_officer"] },
+        "actorId": { "type": "string", "maxLength": 200 },
+        "action": { "type": "string", "maxLength": 120 },
+        "targetType": { "type": "string", "maxLength": 60 },
+        "targetTitle": { "type": "string", "maxLength": 240 },
+        "details": { "type": "string", "maxLength": 600 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["actorName", "actorType", "actorId", "action", "targetType", "targetTitle", "details", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": {
+      "schema": { "$ref": "#/entities/Article" },
+      "description": "Administrative procedures, guides, and official news articles."
+    },
+    "/procedures/{procedureId}": {
+      "schema": { "$ref": "#/entities/ProcedureGuide" },
+      "description": "Dedicated structured GPLX administrative procedure guides."
+    },
+    "/legalDocuments/{docId}": {
+      "schema": { "$ref": "#/entities/LegalDocument" },
+      "description": "Legal documents, laws, circulars, decisions, and official forms."
+    },
+    "/faqs/{faqId}": {
+      "schema": { "$ref": "#/entities/FaqItem" },
+      "description": "Frequently asked questions and statutory answers."
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Procedure categories."
+    },
+    "/siteSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Global site branding and contact configuration."
+    },
+    "/passcodes/{passcodeId}": {
+      "schema": { "$ref": "#/entities/PasscodeAccount" },
+      "description": "Hashed passcode access accounts for officers."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Authorized Google administrator/editor/viewer accounts."
+    },
+    "/media/{mediaId}": {
+      "schema": { "$ref": "#/entities/MediaAsset" },
+      "description": "Registry of uploaded images and attachment documents."
+    },
+    "/activityLogs/{logId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "Audit logs of admin actions."
+    }
+  }
+}
